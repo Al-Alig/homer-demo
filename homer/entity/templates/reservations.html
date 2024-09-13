@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <link rel="stylesheet" href="{% static 'css/styles.css'%}">
+
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+            <h2>Ваши бронирования:</h2>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-md-4 g-4 mt-3">
+                {% for order in reservations %}
+                    <a href="{% url 'entity_detail' order.entity.id %}" class="text-muted text-decoration-none">
+                        <div class="col">
+                            <div class="card shadow-sm">
+                                <img class="bd-placeholder-img card-img-top" width="100%" height="200" src="{% static 'img/image.svg'%}"/>
+                                <div class="card-body">
+                                    <h6 class="card-title pricing-card-title">{{ order.start_date }} - {{ order.close_date }}</h6>
+                                    <div class="d-flex align-items-left">
+                                        <p class="card-text">{{order.entity.name}}</p>
+                                        <p class="card-text">{{order.entity.type}}</p>
+                                        <p class="card-text">{{order.entity.price}} р/сутки</p>
+                                    </div>
+                                    <small class="text-body-secondary">{{ order.entity.country }}, {{order.entity.city}}, {{ order.entity.address }}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

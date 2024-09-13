@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-7">
+                <div class="card border-white">
+                    <div class="card-body p-5 text-left">
+                        <div class="mb-md-5 mt-md-5">
+
+                            <div class="row fs-5">
+
+                                <div class="d-flex">
+                                    <h2 class="text-dark">Профиль пользователя &nbsp;</h2>
+                                    <h2 class="text-primary">{{ user_current.username }}</h2>
+                                </div>
+
+                                <div class="mt-5 mb-4">
+                                    <label for="username" class="form-label">Имя пользователя</label>
+                                    <input class="form-control" disabled type="text" maxlength="30" value="{{ user_current.username }}" name="formUsername" id="username" required>
+                                </div>
+
+                                <div class="mb-4 col-md-6">
+                                    <label for="Email" class="form-label">Почта</label>
+                                    <input class="form-control" disabled id="Email" type="email" maxlength="30" value="{{ user_current.email }}" name="formEmail">
+                                </div>
+
+                                <div class="mb-4 col-md-6">
+                                    <label for="Phone" class="form-label">Телефон</label>
+                                    <input class="form-control" disabled id="Phone" type="text" maxlength="30" value="{{ user_current.phone }}" name="formPhone">
+                                </div>
+
+                                <div class="mb-4 col-md-4">
+                                    <label for="firstname" class="form-label">Имя</label>
+                                    <input class="form-control" disabled id="firstname" type="text" maxlength="30" value="{{ user_current.first_name }}" name="formFirst">
+                                </div>
+
+                                <div class="mb-4 col-md-4">
+                                    <label for="middlename" class="form-label">Отчество</label>
+                                    <input class="form-control" disabled id="middlename" type="text" maxlength="30" value="{{ user_current.middle_name }}" name="formMiddle">
+                                </div>
+
+                                <div class="mb-4 col-md-4">
+                                    <label for="lastname" class="form-label">Фамилия</label>
+                                    <input class="form-control" disabled id="lastname" type="text" maxlength="30" value="{{ user_current.last_name }}" name="formLast">
+                                </div>
+
+                                <div class="mb-4 col-md-6">
+                                    <label for="Country" class="form-label">Страна</label>
+                                    <input class="form-control" disabled id="Country" type="text" maxlength="30" value="{{ user_current.country }}" name="formCountry">
+                                </div>
+
+                                <div class="mb-4 col-md-6">
+                                    <label for="City" class="form-label">Город</label>
+                                    <input class="form-control" disabled id="City" type="text" maxlength="30" value="{{ user_current.city }}" name="formCity">
+                                </div>
+
+                                <div class="mt-5 mb-4 col-md-6">
+                                    <a class="btn btn-primary fs-5 col-md-12" href="javascript:history.back()" role="button">Назад</a>
+                                </div>
+
+                                <div class="mt-5 mb-4 col-md-6">
+                                    <a class="btn btn-secondary fs-5 col-md-12" href="/" role="button">Главная</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

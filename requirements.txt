@@ -1,0 +1,7 @@
+django
+pillow
+pylint
+django_enum
+coverage
+sphinx
+sphinx-press-theme

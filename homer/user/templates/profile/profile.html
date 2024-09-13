@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="p-5 text-left">
+                <div class="mb-md-5 mt-md-5 fs-5">
+                    <img class="rounded-circle" width="200" src="{% static 'profile_photos/profile.svg' %}">
+                    {% if first_name == '' or last_name == '' or middle_name == '' or email == '' or phone == '' %}
+                        <h4>Вы ещё не закончили заполнение профиля. <a href="{% url 'edit-profile' %}">Продолжить?</a></h4><br>
+                    {% endif %}
+                    <dl class="row w-100">
+                        <dt class="col-sm-3 fs-4">Логин</dt>
+                        <dd class="col-sm-9 fs-4">
+                            <p>{{ username }}</p>
+                        </dd>
+
+                        <dt class="col-sm-3 fs-4">ФИО</dt>
+                        <dd class="col-sm-9 fs-4">
+                            {% if first_name %}
+                                <p>{{ first_name }} {{ middle_name }} {{ last_name }}</p>
+                            {% else %}
+                                <p>Не указано</p>
+                            {% endif %}
+                        </dd>
+
+                        <dt class="col-sm-3 fs-4">Адрес</dt>
+                        <dd class="col-sm-9 fs-4">
+                            {% if city and country %}
+                            <p>{{ city }}, {{ country }}</p>
+                            {% elif city %}
+                            <p>{{ city }}</p>
+                            {% elif country %}
+                            <p>{{ country }}</p>
+                            {% else %}
+                            <p>Не указано</p>
+                            {% endif %}
+                        </dd>
+
+                        <dt class="col-sm-3 fs-4">Почта</dt>
+                        <dd class="col-sm-9 fs-4">
+                            {% if email %}
+                            <p>{{ email }}</p>
+                            {% else %}
+                            <p>Не указано</p>
+                            {% endif %}
+                        </dd>
+
+                        <dt class="col-sm-3 fs-4">Телефон</dt>
+                        <dd class="col-sm-9 fs-4">
+                            {% if phone %}
+                            <p> {{ phone }}</p>
+                            {% else %}
+                            <p>Не указано</p>
+                            {% endif %}
+                        </dd>
+
+                        <dt class="col-sm-3 fs-4">Дата регистрации</dt>
+                        <dd class="col-sm-9 fs-4">
+                            <p> {{ creation_date|date:"M d, Y" }}</p>
+                        </dd>
+
+                    </dl>
+                </div>
+                <a class="btn btn-primary fs-5" href="/profile/edit" role="button">Редактировать профиль</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+            <h2>Созданные жилища:</h2>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-md-4 g-4 mt-3">
+                {% for home in offers %}
+                    <a href="{% url 'entity_detail' home.id %}" class="text-muted text-decoration-none">
+                        <div class="col">
+                            <div class="card shadow-sm">
+                                <img class="bd-placeholder-img card-img-top" width="100%" height="200" src="{% static 'img/image.svg'%}"/>
+                                <div class="card-body">
+                                    <h6 class="card-title pricing-card-title">{{ home.price }} ₽/сутки</h6>
+                                    <div class="d-flex align-items-left">
+                                        <p class="card-text">{{home.name}} &nbsp;</p>
+                                        <p class="card-text">{{home.type}}</p>
+                                    </div>
+                                    <small class="text-body-secondary">{{ home.country }}, {{home.city}}, {{ home.address }}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

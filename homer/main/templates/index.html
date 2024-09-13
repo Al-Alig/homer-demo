@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <link rel="stylesheet" href="{% static 'css/styles.css'%}">
+
+    <div class="image-container text-center">
+        <h1 class="image-text text-light">Домовой</h1>
+        <h2 class="image-text text-light">Сервис для бронирования жилья</h2>
+        <form method="POST" action="{% url 'search-entities' %}">
+            {% csrf_token %}
+            <div class="input-group mt-5 w-50">
+                <div class="form-floating">
+                    <input type="text" class="form-control" placeholder="" id="city" name="searched">
+                    <label for="city">Город</label>
+                </div>
+                <select class="form-select" name="formType" id="Type">
+                    <option value="2">Квартира</option>
+                    <option value="3">Дом</option>
+                    <option value="1">Студия</option>
+                    <option value="4">Офис</option>
+                    <option value="5">Участок</option>
+                    <option value="6">Другое</option>
+                </select>
+                <button class="btn btn-primary col-md-2" type="submit">Найти</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-md-4 g-4">
+                {% for home in offers %}
+                    <a href="{% url 'entity_detail' home.id %}" class="text-muted text-decoration-none">
+                        <div class="col">
+                            <div class="card shadow-sm">
+                                <img class="bd-placeholder-img card-img-top" width="100%" height="200" src="{{ home.entity_image.url }}"/>
+                                <div class="card-body">
+                                    <h6 class="card-title pricing-card-title">{{ home.price }} ₽/сутки</h6>
+                                    <div class="d-flex align-items-left">
+                                        <p class="card-text">{{home.name}} &nbsp;</p>
+                                        <p class="card-text">{{home.type}}</p>
+                                    </div>
+                                    <small class="text-body-secondary">{{ home.country }}, {{home.city}}, {{ home.address }}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-7">
+                <div class="card border-white">
+                    <div class="card-body p-5 text-left">
+                        <div class="mb-md-5 mt-md-5">
+
+                            <h2>Создать предложение</h2>
+
+                            <form method="POST" class="row fs-5" enctype="multipart/form-data">
+                                {% csrf_token %}
+
+                                <div class="mt-5 mb-2">
+                                    <label for="name" class="form-label">Название</label>
+                                    <input class="form-control" id="name" type="text" maxlength="50" name="formName" required>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="description" class="form-label">Описание</label>
+                                    <textarea id="description" name="formDescription" class="form-control"></textarea>
+                                </div>
+
+                                <div class="mb-2 col-md-6">
+                                    <label for="country" class="form-label">Страна</label>
+                                    <input class="form-control" id="country" type="text" maxlength="25" name="formCountry" required>
+                                </div>
+
+                                <div class="mb-2 col-md-6">
+                                    <label for="City" class="form-label">Город</label>
+                                    <input class="form-control" id="City" type="text" maxlength="25" name="formCity" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="address" class="form-label">Адрес</label>
+                                    <input class="form-control" id="address" type="text" maxlength="100" name="formAddress" required>
+                                </div>
+
+                                <div class="mb-3 col-md-6">
+                                    <label for="Type" class="form-label">Тип жилья</label>
+                                    <select class="form-select" name="formType" id="Type">
+                                        <option value="2">Квартира</option>
+                                        <option value="1">Дом</option>
+                                        <option value="3">Студия</option>
+                                        <option value="4">Офис</option>
+                                        <option value="5">Участок</option>
+                                        <option value="6">Другое</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 col-md-6">
+                                    <label for="price" class="form-label">Цена</label>
+                                    <div class="input-group">
+                                        <input type="number" id="price" name="formPrice" class="form-control" required>
+                                        <span class="input-group-text" id="basic-addon2">₽/сутки</span>
+                                    </div>
+                                </div>
+
+                                <div class="mt-5 mb-2">
+                                    <div class="mb-4 d-flex justify-content-center">
+                                        <img id="selectedImage" src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg"
+                                        alt="example placeholder" style="width: 300px;" />
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <div data-mdb-ripple-init class="btn btn-primary btn-rounded">
+                                            <label class="form-label text-white m-1" for="formImage">Choose file</label>
+                                            <input type="file" class="form-control d-none" accept="image/*" name="formImage" id="formImage"/>
+{#                                             onchange="displaySelectedImage(event, 'selectedImage')" #}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-5 mb-4 col-md-6">
+                                    <a class="btn btn-secondary fs-5 w-100" href="/" role="button">Отмена</a>
+                                </div>
+
+                                <div class="mt-5 mb-4 col-md-6">
+                                    <button type="submit" class="btn btn-primary fs-5 w-100">Создать</button>
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function displaySelectedImage(event, elementId) {
+            const selectedImage = document.getElementById(elementId);
+            const fileInput = event.target;
+
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    selectedImage.src = e.target.result;
+                };
+
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+        }
+    </script>
+
+{% endblock %}
